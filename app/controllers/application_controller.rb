@@ -22,11 +22,6 @@ class ApplicationController < ActionController::Base
     params = { :token => Rails.application.secrets.slack_token, :channel => Rails.application.secrets.slack_channel, :text => msg, :pretty => 1 }
     uri.query = URI.encode_www_form(params)
 
-    res = Net::HTTP.get_response(uri)
-    if res.is_a?(Net::HTTPSuccess)
-      puts "Slack response: #{res.body}"
-    else
-      puts "Slack request failed: #{res}"
-    end
+    Net::HTTP.get_response(uri)
   end
 end
